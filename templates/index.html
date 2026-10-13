@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceMate | Text-to-Speech Studio</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="container">
+
+        <!-- Website header and logo -->
+        <header class="header">
+            <div class="logo">V</div>
+            <div>
+                <h1>VoiceMate</h1>
+                <p class="subtitle">Text-to-Speech Studio</p>
+            </div>
+        </header>
+
+        <!-- Main text-to-speech interface -->
+        <section class="card">
+            <h2>Turn your text into speech</h2>
+            <p class="description">
+                Enter text, customize your voice, and listen.
+            </p>
+
+            <form method="POST">
+                <label for="text">Your text</label>
+                <textarea
+                    id="text"
+                    name="text"
+                    rows="7"
+                    maxlength="5000"
+                    placeholder="Type something you want VoiceMate to speak..."
+                    required>{{ text }}</textarea>
+
+                <!-- Speech speed control -->
+                <div class="control">
+                    <div class="control-heading">
+                        <label for="speed">Speech speed</label>
+                        <span>{{ speed }}</span>
+                    </div>
+
+                    <input
+                        type="range"
+                        id="speed"
+                        name="speed"
+                        min="100"
+                        max="250"
+                        value="{{ speed }}">
+                </div>
+
+                <!-- Volume control -->
+                <div class="control">
+                    <div class="control-heading">
+                        <label for="volume">Volume</label>
+                        <span>{{ volume }}%</span>
+                    </div>
+
+                    <input
+                        type="range"
+                        id="volume"
+                        name="volume"
+                        min="0"
+                        max="100"
+                        value="{{ volume }}">
+                </div>
+
+                <!-- Speech and download buttons -->
+                <div class="buttons">
+                    <button
+                        class="speak-button"
+                        type="submit"
+                        formaction="{{ url_for('speak') }}">
+                        ▶ Speak Text
+                    </button>
+
+                    <button
+                        class="save-button"
+                        type="submit"
+                        formaction="{{ url_for('save') }}">
+                        ↓ Save as WAV
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Display status notification -->
+        {% if message %}
+        <p class="message" role="status">{{ message }}</p>
+        {% endif %}
+
+        <!-- Technology credits -->
+        <footer>
+            Built with HTML, CSS, Python, Flask and pyttsx3
+        </footer>
+
+    </main>
+</body>
+</html>
