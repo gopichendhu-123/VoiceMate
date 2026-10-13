@@ -32,3 +32,7 @@ VoiceMate is a web application that converts written text into speech.
 
 ## Author
 Created as a Python and Flask learning project.
+
+### Screenshot
+
+![VoiceMate Application](screenshots/voicemate.png)
